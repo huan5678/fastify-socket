@@ -1,0 +1,12 @@
+{"level":"info","message":"連線至資料庫... mongodb+srv://admin:<password>@cluster0.uvlxg3d.mongodb.net/fastify-socket?retryWrites=true&w=majority&appName=Cluster0","service":"fastify-socket","timestamp":"2024-05-03 16:54:34"}
+{"level":"info","message":"{\"level\":30,\"time\":1714726474720,\"pid\":1800,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://[::1]:3000\"}","service":"fastify-socket","timestamp":"2024-05-03 16:54:34"}
+{"level":"info","message":"Server started in 0.015 seconds","service":"fastify-socket","timestamp":"2024-05-03 16:54:34"}
+{"level":"info","message":"Server started successfully","service":"fastify-socket","timestamp":"2024-05-03 16:54:34"}
+{"level":"info","message":"資料庫連線成功","service":"fastify-socket","timestamp":"2024-05-03 16:54:34"}
+{"level":"info","message":"連線至資料庫...","service":"fastify-socket","timestamp":"2024-05-03 16:55:26"}
+{"level":"info","message":"{\"level\":30,\"time\":1714726526609,\"pid\":149592,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://[::1]:3000\"}","service":"fastify-socket","timestamp":"2024-05-03 16:55:26"}
+{"level":"info","message":"Server started in 0.016 seconds","service":"fastify-socket","timestamp":"2024-05-03 16:55:26"}
+{"level":"info","message":"Server started successfully","service":"fastify-socket","timestamp":"2024-05-03 16:55:26"}
+{"level":"info","message":"資料庫連線成功","service":"fastify-socket","timestamp":"2024-05-03 16:55:26"}
+{"level":"info","message":"{\"level\":30,\"time\":1714726609522,\"pid\":149592,\"hostname\":\"阿象工作用\",\"reqId\":\"req-1\",\"req\":{\"method\":\"GET\",\"url\":\"/\",\"hostname\":\"localhost:3000\"},\"msg\":\"incoming request\"}","service":"fastify-socket","timestamp":"2024-05-03 16:56:49"}
+{"level":"info","message":"{\"level\":30,\"time\":1714726609534,\"pid\":149592,\"hostname\":\"阿象工作用\",\"reqId\":\"req-1\",\"res\":{\"statusCode\":200},\"responseTime\":11.63129997253418,\"msg\":\"request completed\"}","service":"fastify-socket","timestamp":"2024-05-03 16:56:49"}
