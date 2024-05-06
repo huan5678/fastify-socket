@@ -1,7 +1,6 @@
 import { SignJWT, jwtVerify, type JWTPayload } from 'jose';
 import bcrypt from 'bcryptjs';
 
-
 const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET);
 
 const { JWT_EXPIRES_DAY } = process.env;
@@ -42,7 +41,7 @@ export const verifyPassword = (password: string, passhash: string): boolean => {
     return bcrypt.compareSync(password, passhash);
   };
 
-const generateRandomCode = () => {
+export const generateRandomCode = () => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
   let code = '';
