@@ -36,6 +36,11 @@ const startServer = async () => {
       options: Object.assign({}),
     });
 
+    app.register(AutoLoad, {
+      dir: path.join(__dirname, "..", "routers"),
+      options: Object.assign({}),
+    });
+
     await app.ready();
     app.io.on("connection", (socket) => {
       Logger.info(`New connection: ${socket.id}`);

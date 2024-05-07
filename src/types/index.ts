@@ -22,3 +22,9 @@ export interface IUser extends Document {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface UserUpdateBody
+{
+  [key: string]: string | Date | { facebook?: string; twitter?: string; instagram?: string };
+}
+

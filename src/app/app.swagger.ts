@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
 import Swagger from "@fastify/swagger";
 import SwaggerUI from "@fastify/swagger-ui";
-import { swaggerSpec } from "./app.swagger-spec";
+import { swaggerSpec } from "@/app/app.swagger-spec";
 
 export async function afterRegisterRoutes(fastify: FastifyInstance) {
   fastify.register(Swagger, {

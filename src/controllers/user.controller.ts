@@ -1,23 +1,27 @@
 import { FastifyReply, FastifyRequest } from "fastify";
+import validator from "validator";
+import { UserService } from "@/services";
+import { appError, successHandle } from "@/utils/handle";
+import { IUser, UserUpdateBody } from "@/types";
 
-class MemberController {
-  public static getAllMembers = async (req: FastifyRequest, replay: FastifyReply) =>
+class UserController {
+  public static getAllMembers = async (req: FastifyRequest & { query: { page: string, limit: string } }, replay: FastifyReply) =>
   {
     // 從查詢參數中獲取頁碼和限制數量，並確保它們是數字類型
     const page = parseInt(req.query.page, 10) || 1; // 預設為第1頁
     const limit = parseInt(req.query.limit, 10) || 10; // 預設限制為10
 
     // 獲取總用戶數，用於計算總頁數
-    const totalCount = await MemberService.countMembers();
+    const totalCount = await UserService.countMembers();
     const skip = (page - 1) * limit;
 
     // 添加skip和limit進行分頁
-    const users = await MemberService.getAllMembers(skip, limit);
+    const users = await UserService.getAllMembers(skip, limit);
     // 計算總頁數
     const totalPages = Math.ceil(totalCount / limit);
 
     // 使用分頁後的結果回應
-    return replay.send({
+    return successHandle(replay, "成功取得所有使用者資訊", ({
       result: users,
       pagination: {
         page,
@@ -25,43 +29,46 @@ class MemberController {
         totalCount,
         totalPages,
       },
-    });
+    }));
   };
 
-  public static getMemberById: RequestHandler = async (req, replay, next) => {
+  public static getMemberById = async (req: FastifyRequest & { params: { id: string } }, replay: FastifyReply) => {
     const { id } = req.params;
+    console.log(id);
     if (!id) {
-      throw appError({ code: 400, message: "請提供使用者 id", next });
+      throw appError(replay,{ code: 400, message: "請提供使用者 id" });
     }
-    const user = await MemberService.getMemberById(id);
+    const user = await UserService.getMemberById(id, replay);
 
-    return successHandle(replay, "成功取的使用者資訊", { replayult: user });
+    return successHandle(replay, "成功取的使用者資訊", { result: user });
   };
 
-  public static deleteMemberById: RequestHandler = async (req, replay, next) =>
+  public static deleteMemberById = async (req: FastifyRequest & { params: { id: string } }, replay: FastifyReply) =>
   {
     const { id } = req.params;
-    await AuthService.deleteMemberById(id, next);
-    return successHandle(replay, "成功刪除使用者", { replayult: null });
+    await UserService.deleteMemberById(id, replay);
+    return successHandle(replay, "成功刪除使用者", { result: null });
   };
 
-  public static updateProfile: RequestHandler = async (req: any, replay, next) => {
+  public static updateProfile = async (req: FastifyRequest & { user: IUser }, replay: FastifyReply) => {
     const { user } = req;
     const validFields = ["name", "avatar", "gender", "socialMedia" , "birthday"];
-    const updateData = {};
+    const updateData: UserUpdateBody = {
+    };
+    const body = req.body as UserUpdateBody;
     for (const field of validFields) {
-      if (req.body[field] !== undefined) {
-        updateData[field] = req.body[field];
+      if (body[field] !== undefined) {
+        updateData[field] = body[field];
       }
     }
 
-    if (updateData["avatar"] && !validator.isURL(updateData["avatar"])) {
-      throw appError({ code: 400, message: "請確認照片是否傳入網址", next });
+    if (updateData["avatar"] && !validator.isURL(updateData["avatar"] as string)) {
+      throw appError(replay, { code: 400, message: "請確認照片是否傳入網址" });
     }
-    const userData = await MemberService.updateMemberData(user.id, updateData);
-    return successHandle(replay, "成功更新使用者資訊！", { replayult: userData });
+    const userData = await UserService.updateMemberData(user.id, updateData, replay);
+    return successHandle(replay, "成功更新使用者資訊！", { result: userData });
   };
 
 }
 
-export default MemberController;
+export default UserController;
