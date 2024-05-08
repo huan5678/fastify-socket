@@ -24,9 +24,8 @@ export const swaggerSpec: FastifyDynamicSwaggerOptions[ "openapi" ] = {
   },
   tags: [
       {
-          name: "User",
-          description: "Example",
-          externalDocs: { url: "http://example.com" },
+          name: "Member",
+          description: "Operations about member",
       },
   ],
 };

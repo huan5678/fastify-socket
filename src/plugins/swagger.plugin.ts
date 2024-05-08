@@ -1,11 +1,26 @@
+import 'zod-openapi/extend';
+import fp from "fastify-plugin";
 import { FastifyInstance } from "fastify";
 import Swagger from "@fastify/swagger";
 import SwaggerUI from "@fastify/swagger-ui";
-import { swaggerSpec } from "@/app/app.swagger-spec";
+import { swaggerSpec } from "@/config/swagger-spec";
+import {
+  fastifyZodOpenApiPlugin,
+  fastifyZodOpenApiTransform,
+  fastifyZodOpenApiTransformObject,
+  serializerCompiler,
+  validatorCompiler,
+} from 'fastify-zod-openapi';
 
-export async function afterRegisterRoutes(fastify: FastifyInstance) {
+export default fp(async (fastify: FastifyInstance) =>
+{
+  fastify.setValidatorCompiler(validatorCompiler);
+  fastify.setSerializerCompiler(serializerCompiler);
+  fastify.register(fastifyZodOpenApiPlugin);
   fastify.register(Swagger, {
     openapi: swaggerSpec,
+    transform: fastifyZodOpenApiTransform,
+    transformObject: fastifyZodOpenApiTransformObject,
   });
 
   fastify.register(SwaggerUI, {
@@ -28,4 +43,4 @@ export async function afterRegisterRoutes(fastify: FastifyInstance) {
     if (err) throw err;
     fastify.swagger();
   });
-}
+});

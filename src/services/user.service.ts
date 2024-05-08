@@ -1,7 +1,7 @@
 import { Types } from "mongoose";
 import { FastifyReply } from "fastify";
 import { UserUpdateBody } from "@/types";
-import User from "@/models/user";
+import User from "@/models/user.model";
 import { appError } from "@/utils/handle";
 
 async function validateObjectId(id: string, reply: FastifyReply) {
@@ -18,7 +18,21 @@ async function notFindUserError(id: string, reply: FastifyReply)
   }
 }
 
-class UserService {
+class UserService
+{
+  static async createAccount(data: { email: string; password: string; name: string }, replay: FastifyReply)
+  {
+    const existingUser = await User.findOne({ email: data.email });
+    if (existingUser) {
+      throw appError(replay, { code: 400, message: "User already exists." });
+    }
+    // 創建用戶
+    const user = new User(data);
+    await user.save();
+
+    return user;
+  }
+
   static async countMembers()
   {
     // 計算用戶數量

@@ -1,4 +1,20 @@
 import { Document } from "mongoose";
+import { JWT } from '@fastify/jwt';
+import { Server } from "socket.io";
+
+declare module 'fastify' {
+  interface FastifyRequest {
+    jwt: JWT,
+  }
+  export interface FastifyInstance
+  {
+    io: Server;
+    authenticate: (
+      request: FastifyRequest,
+      reply: FastifyReply,
+    ) => Promise<void>
+  }
+}
 
 export interface RequestParams
 {

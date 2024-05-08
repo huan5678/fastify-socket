@@ -1,11 +1,8 @@
-import path from "path";
 import { FastifyRequest, FastifyReply } from "fastify";
-import AutoLoad from "@fastify/autoload";
-import fastifyIO from "fastify-socket.io";
-import { Server } from "socket.io";
 import Logger from "@/utils/logger";
-import app from "./app.fastify";
-import { afterRegisterRoutes } from "./app.swagger";
+import app from "@/app/app.fastify";
+import { Server, Socket } from "socket.io";
+
 declare module "fastify" {
   interface FastifyInstance {
     io: Server;
@@ -27,22 +24,8 @@ const startServer = async () => {
       reply.send(healthCheck);
     });
 
-    await afterRegisterRoutes(app);
-
-    app.register(fastifyIO);
-
-    app.register(AutoLoad, {
-      dir: path.join(__dirname, "..", "plugins"),
-      options: Object.assign({}),
-    });
-
-    app.register(AutoLoad, {
-      dir: path.join(__dirname, "..", "routers"),
-      options: Object.assign({}),
-    });
-
     await app.ready();
-    app.io.on("connection", (socket) => {
+    app.io.on("connection", (socket: Socket) => {
       Logger.info(`New connection: ${socket.id}`);
       socket.on("disconnect", () => {
         Logger.info(`Connection closed: ${socket.id}`);
