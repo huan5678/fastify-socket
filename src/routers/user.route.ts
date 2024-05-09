@@ -2,14 +2,10 @@ import UserController from "@/controllers/user.controller";
 import { IUser, UserUpdateBody } from "@/types";
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { Schemas } from '@/schemas/user.schema';
-import {
-  type FastifyZodOpenApiSchema,
-  type FastifyZodOpenApiTypeProvider,
-} from 'fastify-zod-openapi';
 
 export default async function (fastify: FastifyInstance)
 {
-  fastify.withTypeProvider<FastifyZodOpenApiTypeProvider>().post(
+  fastify.post(
     "/member",
     {
       schema: {
@@ -20,17 +16,11 @@ export default async function (fastify: FastifyInstance)
         response: {
           200: Schemas.createUser.response,
         },
-      } satisfies FastifyZodOpenApiSchema,
+      },
     },
-    async (request: FastifyRequest, reply: FastifyReply) => {
-      const body = (request.body as IUser) || {};
-      return UserController.createAccount(
-        Object.assign(request, { body }),
-        reply
-      );
-    }
+    async (request: FastifyRequest, reply: FastifyReply) => await UserController.createAccount(request, reply)
   );
-  fastify.withTypeProvider<FastifyZodOpenApiTypeProvider>().get(
+  fastify.get(
     "/member",
     {
       preHandler: fastify.authenticate, //onRequest global hook, preHandler route hook
@@ -52,55 +42,25 @@ export default async function (fastify: FastifyInstance)
             },
           },
         },
-      } satisfies FastifyZodOpenApiSchema,
+      },
     },
     async (request: FastifyRequest, reply: FastifyReply) => {
       reply.send({ message: "Hello, member!" });
     }
   );
 
-  fastify.withTypeProvider<FastifyZodOpenApiTypeProvider>().get(
+  fastify.get(
     "/members",
     {
       schema: {
         description: "Get members",
         tags: ["Member"],
         summary: "Get members",
-        params: Schemas.userQueryStrings,
+        querystring: Schemas.userQueryStrings,
         response: {
-          200: {
-            description: "Successful response",
-            type: "object",
-            properties: {
-          message: { type: "string" },
-          status: { type: "boolean" },
-          data: {
-            type: "object",
-            properties: {
-              users: {
-                type: "array",
-                items: {
-                  type: "object",
-                  properties: {
-                    // 設定您用戶對象的具體屬性
-                  }
-                }
-              },
-              pagination: {
-                type: "object",
-                properties: {
-                  page: { type: "integer" },
-                  limit: { type: "integer" },
-                  totalCount: { type: "integer" },
-                  totalPages: { type: "integer" },
-                }
-              },
-            }
-          },
+          200: Schemas.userResponse,
         },
       },
-    },
-      } satisfies FastifyZodOpenApiSchema,
     },
     async (request: FastifyRequest<{ Querystring: { page: string; limit: string } }>, reply: FastifyReply) => await UserController.getAllMembers(request, reply)
   );
@@ -110,38 +70,16 @@ export default async function (fastify: FastifyInstance)
     {
       schema: {
         description: "Get member by id",
-        tags: ["Member"],
+        tags: [ "Member" ],
         summary: "Get member by id",
-        params: {
-          type: "object",
-          properties: {
-            id: {
-              type: "string",
-              description: "the user identifier, as userId",
-            },
-          },
-          required: ["id"],
-        },
+        params: Schemas.userIdParams,
         response: {
-          200: {
-            description: "Successful response",
-            type: "object",
-            properties: {
-              message: { type: "string" },
-            },
-          },
+          200: Schemas.getUserById.response,
+          404: Schemas.notFindUserError,
         },
-      },
+      }
     },
-    async (request: FastifyRequest, reply: FastifyReply) => {
-      const params = {
-        id: (request.params as { id?: string }).id || "",
-      };
-      return await UserController.getMemberById(
-        Object.assign(request, { params }),
-        reply
-      );
-    }
+    async (request: FastifyRequest<{ Params: { id: string } }>, reply: FastifyReply) => await UserController.getMemberById(request, reply)
   );
 
   fastify.patch(
@@ -157,37 +95,11 @@ export default async function (fastify: FastifyInstance)
             bearerAuth: [],
           },
         ],
-        params: {
-          type: "object",
-          properties: {
-            id: {
-              type: "string",
-              description: "the user identifier, as userId",
-            },
-          },
-          required: ["id"],
-        },
-        body: {
-          type: "object",
-          additionalProperties: false,
-          properties: {
-            name: { type: "string" },
-            email: { type: "string" },
-            password: { type: "string" },
-            role: { type: "string" },
-            facebook: { type: "string" },
-            twitter: { type: "string" },
-            instagram: { type: "string" },
-          },
-        },
+        params: Schemas.userIdParams,
+        body: Schemas.userUpdateBody,
         response: {
-          200: {
-            description: "Successful response",
-            type: "object",
-            properties: {
-              message: { type: "string" },
-            },
-          },
+          200: Schemas.getUserById.response,
+          404: Schemas.notFindUserError,
         },
       },
     },
@@ -218,16 +130,7 @@ export default async function (fastify: FastifyInstance)
             bearerAuth: [],
           },
         ],
-        params: {
-          type: "object",
-          properties: {
-            id: {
-              type: "string",
-              description: "the user identifier, as userId",
-            },
-          },
-          required: ["id"],
-        },
+        params: Schemas.userIdParams,
         response: {
           200: {
             description: "Successful response",
@@ -236,6 +139,7 @@ export default async function (fastify: FastifyInstance)
               message: { type: "string" },
             },
           },
+          404: Schemas.notFindUserError,
         },
       },
     },

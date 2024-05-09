@@ -2,8 +2,7 @@ import fp from "fastify-plugin";
 import jwt from "@fastify/jwt";
 import auth from "@fastify/auth";
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import User from "@/models/user.model";
-import { IUser } from "@/types";
+import prisma from "@/utils/prismaClient";
 
 export default fp(async (fastify: FastifyInstance) =>
 {
@@ -27,11 +26,19 @@ export default fp(async (fastify: FastifyInstance) =>
       await request.jwtVerify();
       const decodedToken = request.user as { id: string };
       const userId = decodedToken.id;
-      const user = await User.findById(userId);
+      const user = await prisma.user.findUnique({
+            where: { id: userId },
+        });
       if (!user) {
         throw new Error("User not found");
       }
-      request.user = user as IUser;
+      request.user = {
+        id: user.id,
+        email: user.email,
+        role: user.role,
+        name: user.name,
+        avatar: user.avatar,
+      };
     } catch (err) {
       reply.send(err);
     }

@@ -35,12 +35,18 @@ export interface IUser extends Document {
   email: string;
   password: string;
   role: "user" | "admin";
+  avatar: string;
+  gender: "male" | "female" | "other";
+  socialMedia: {
+    facebook?: string;
+    instagram?: string;
+  };
   createdAt: Date;
   updatedAt: Date;
 }
 
 export interface UserUpdateBody
 {
-  [key: string]: string | Date | { facebook?: string; twitter?: string; instagram?: string };
+  [key: string]: string | Date | { facebook: string; instagram: string };
 }
 

@@ -1,8 +1,9 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import validator from "validator";
+import z from "zod";
 import { UserService } from "@/services";
 import { appError, successHandle } from "@/utils/handle";
 import { IUser, UserUpdateBody } from "@/types";
+import { passwordCheck } from "@/utils/auth";
 
 class UserController {
   public static getAllMembers = async (req: FastifyRequest<{ Querystring: { page: string; limit: string } }>, replay: FastifyReply) =>
@@ -35,18 +36,23 @@ class UserController {
     });
   };
 
-  public static getMemberById = async (req: FastifyRequest & { params: { id: string } }, replay: FastifyReply) => {
+  public static getMemberById = async (req: FastifyRequest<{ Params: { id: string } }>, replay: FastifyReply) =>
+  {
+    try {
     const { id } = req.params;
-    console.log(id);
+    console.log("Request for user ID:", id);
     if (!id) {
-      throw appError(replay,{ code: 400, message: "請提供使用者 id" });
+      throw appError(replay,{ code: 400, message: "Invalid ID" });
     }
-    const user = await UserService.getMemberById(id, replay);
+    const data = await UserService.getMemberById(id, replay);
 
-    return successHandle(replay, {
+    return data && successHandle(replay, {
       message: "成功取的使用者資訊",
-      data: { user }
+      data,
     });
+    } catch (error) {
+      throw appError(replay, { code: 500, message: "Internal Server Error" });
+    }
   };
 
   public static deleteMemberById = async (req: FastifyRequest & { params: { id: string } }, replay: FastifyReply) =>
@@ -72,13 +78,13 @@ class UserController {
       }
     }
 
-    if (updateData["avatar"] && !validator.isURL(updateData["avatar"] as string)) {
-      throw appError(replay, { code: 400, message: "請確認照片是否傳入網址" });
+    if (updateData["avatar"] && !z.string().url().safeParse(updateData["avatar"]).success) {
+      throw appError(replay, { code: 400, message: "Please provide a valid URL for the avatar" });
     }
-    const userResult = await UserService.updateMemberData(user.id, updateData, replay);
+    const data = await UserService.updateMemberData(user.id, updateData, replay);
     return successHandle(replay, {
       message: "成功更新使用者資訊！",
-      data: { user: userResult }
+      data,
     });
   };
 
@@ -88,10 +94,16 @@ class UserController {
     if (!email || !password || !name) {
       throw appError(replay, { code: 400, message: "Please provide email, password, name" });
     }
-    const user = await UserService.createAccount({ email, password, name }, replay);
+    if (!z.string().email().safeParse(email).success) {
+      throw appError(replay, { code: 400, message: "Please provide a valid email" });
+    }
+    if (!passwordCheck(password)) {
+      throw appError(replay, { code: 400, message: "Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character" });
+    }
+    const data = await UserService.createAccount({ email, password, name }, replay);
     return successHandle(replay, {
       message: "成功建立帳號！",
-      data: { user }
+      data,
     });
   };
 }

@@ -1,78 +1,62 @@
-import { Types } from "mongoose";
 import { FastifyReply } from "fastify";
 import { UserUpdateBody } from "@/types";
-import User from "@/models/user.model";
 import { appError } from "@/utils/handle";
+import { generateToken } from "@/utils/auth";
+import prisma from "@/utils/prismaClient";
 
-async function validateObjectId(id: string, reply: FastifyReply) {
-  if (!Types.ObjectId.isValid(id)) {
-    throw appError(reply, { code: 400, message: "Invalid ID format." });
-  }
-}
+const User = prisma.user;
 
-async function notFindUserError(id: string, reply: FastifyReply)
-{
-  const user = await User.findById(id);
+async function findUser(id: string, reply: FastifyReply) {
+  const user = await User.findUnique({ where: { id } });
   if (!user) {
     throw appError(reply, { code: 404, message: "User not found." });
   }
+  return user;
 }
 
-class UserService
-{
-  static async createAccount(data: { email: string; password: string; name: string }, replay: FastifyReply)
-  {
-    const existingUser = await User.findOne({ email: data.email });
+class UserService {
+  static async createAccount(data: { email: string; password: string; name: string }, reply: FastifyReply) {
+    const existingUser = await User.findUnique({ where: { email: data.email } });
     if (existingUser) {
-      throw appError(replay, { code: 400, message: "User already exists." });
+      throw appError(reply, { code: 400, message: "User already exists." });
     }
-    // 創建用戶
-    const user = new User(data);
-    await user.save();
-
-    return user;
+    const user = await User.create({ data });
+    const token = generateToken({ userId: user.id, role: user.role });
+    return {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      token,
+    };
   }
 
-  static async countMembers()
-  {
-    // 計算用戶數量
-    const countMembers = await User.find().countDocuments();
-
-    return countMembers;
+  static async countMembers() {
+    return await User.count();
   }
-  static async getAllMembers(skip: number, limit: number)
-  {
-    // 查詢所有用戶
-    const allMembers = await User.find().skip(skip).limit(limit);
 
-    return allMembers;
+  static async getAllMembers(skip: number, limit: number) {
+    return await User.findMany({
+      skip,
+      take: limit,
+    });
   }
-  static async getMemberById(id: string, reply: FastifyReply)
-  {
-    await validateObjectId(id, reply);
-    await notFindUserError(id, reply);
-    // 通過id查詢用戶
-    const member = await User.findById(id);
 
-    return member;
+  static async getMemberById(id: string, reply: FastifyReply) {
+    return await findUser(id, reply);
   }
-  static async deleteMemberById(id: string, reply: FastifyReply)
-  {
-    await validateObjectId(id, reply);
-    await notFindUserError(id, reply);
-    // 通過id刪除用戶
-    await User.findByIdAndDelete(id);
 
+  static async deleteMemberById(id: string, reply: FastifyReply) {
+    await findUser(id, reply);
+    await User.delete({ where: { id } });
     return true;
   }
-  static async updateMemberData(id: string, data: UserUpdateBody, reply: FastifyReply)
-  {
-    await validateObjectId(id, reply);
-    await notFindUserError(id, reply);
-    // 通過id更新用戶資料
-    const member = await User.findByIdAndUpdate(id, data, { new: true });
 
-    return member;
+  static async updateMemberData(id: string, data: UserUpdateBody, reply: FastifyReply) {
+    await findUser(id, reply);
+    return await User.update({
+      where: { id },
+      data,
+    });
   }
 }
 

@@ -54,8 +54,7 @@ export const generateRandomCode = () => {
   return code;
 };
 
-export const passwordRule =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[`~!@#$%^&*()_+<>?:"{},.\-\/\\;'[\]]).{8,}$/;
+export const passwordRule = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[`~!@#$%^&*()_+<>?:"{},./\\;'[\]-]).{8,}$/;
 
 export const passwordCheck = (password: string) => {
   return passwordRule.test(password);
