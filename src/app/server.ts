@@ -1,13 +1,6 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import Logger from "@/utils/logger";
 import app from "@/app/app.fastify";
-import { Server, Socket } from "socket.io";
-
-declare module "fastify" {
-  interface FastifyInstance {
-    io: Server;
-  }
-}
 
 const startServer = async () => {
   const port = process.env.PORT || "3000";
@@ -25,12 +18,6 @@ const startServer = async () => {
     });
 
     await app.ready();
-    app.io.on("connection", (socket: Socket) => {
-      Logger.info(`New connection: ${socket.id}`);
-      socket.on("disconnect", () => {
-        Logger.info(`Connection closed: ${socket.id}`);
-      });
-    });
 
     await app.listen({
       port: parseInt(port),

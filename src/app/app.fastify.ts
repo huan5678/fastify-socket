@@ -1,7 +1,6 @@
 import path from "path";
 import { fastify } from "fastify";
 import AutoLoad from "@fastify/autoload";
-import fastifyIO from "fastify-socket.io";
 import { FastifySchemaValidationError } from "fastify/types/schema.js";
 import fastifyGracefulShutdown from "fastify-graceful-shutdown";
 import Logger, { fastifyLogger } from "@/utils/logger";
@@ -22,8 +21,6 @@ app.register(cors, {
 app.register(formbody);
 
 app.register(fastifyGracefulShutdown);
-
-app.register(fastifyIO);
 
 app.register(AutoLoad, {
   dir: path.join(__dirname, "..", "plugins"),
