@@ -3,7 +3,7 @@
 [![Documentation](https://img.shields.io/badge/documentation-yes-brightgreen.svg)](/docs)
 [![License: ISC](https://img.shields.io/badge/License-ISC-yellow.svg)](#)
 
-> fastify prisma mongodb
+> fastify prisma mongodb socket.io IM starter kit application
 
 ## Install
 

@@ -82,6 +82,10 @@ class UserController {
       throw appError(replay, { code: 400, message: "Please provide a valid URL for the avatar" });
     }
     const data = await UserService.updateMemberData(user.id, updateData, replay);
+    req.server.notifyUsers('user_data_updated', {
+      id: user.id,
+      updates: data
+    });
     return successHandle(replay, {
       message: "成功更新使用者資訊！",
       data,
@@ -101,6 +105,11 @@ class UserController {
       throw appError(replay, { code: 400, message: "Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character" });
     }
     const data = await UserService.createAccount({ email, password, name }, replay);
+    req.server.notifyUsers('new_user_registered', {
+      id: data.id,
+      email: data.email,
+      name: data.name
+    });
     return successHandle(replay, {
       message: "成功建立帳號！",
       data,

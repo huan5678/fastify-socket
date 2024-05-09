@@ -482,3 +482,70 @@
 {"level":"info","message":"Server started in 2.453 seconds","service":"fastify-socket","timestamp":"2024-05-09 14:20:19"}
 {"level":"info","message":"Server started successfully","service":"fastify-socket","timestamp":"2024-05-09 14:20:19"}
 {"level":"info","message":"{\"level\":20,\"time\":1715237703061,\"pid\":19248,\"hostname\":\"阿象工作用\",\"plugin\":\"fastify-graceful-shutdown\",\"signal\":\"SIGINT\",\"msg\":\"received signal\"}","service":"fastify-socket","timestamp":"2024-05-09 14:55:03"}
+{"level":"info","message":"資料庫連線成功","service":"fastify-socket","timestamp":"2024-05-09 15:32:25"}
+{"level":"info","message":"{\"level\":30,\"time\":1715239946130,\"pid\":15596,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://[::1]:3000\"}","service":"fastify-socket","timestamp":"2024-05-09 15:32:26"}
+{"level":"info","message":"{\"level\":30,\"time\":1715239946133,\"pid\":15596,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://127.0.0.1:3000\"}","service":"fastify-socket","timestamp":"2024-05-09 15:32:26"}
+{"level":"info","message":"Server started in 1.751 seconds","service":"fastify-socket","timestamp":"2024-05-09 15:32:26"}
+{"level":"info","message":"Server started successfully","service":"fastify-socket","timestamp":"2024-05-09 15:32:26"}
+{"level":"info","message":"資料庫連線成功","service":"fastify-socket","timestamp":"2024-05-09 15:39:14"}
+{"level":"info","message":"{\"level\":30,\"time\":1715240355029,\"pid\":1788,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://[::1]:3000\"}","service":"fastify-socket","timestamp":"2024-05-09 15:39:15"}
+{"level":"info","message":"{\"level\":30,\"time\":1715240355033,\"pid\":1788,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://127.0.0.1:3000\"}","service":"fastify-socket","timestamp":"2024-05-09 15:39:15"}
+{"level":"info","message":"Server started in 1.867 seconds","service":"fastify-socket","timestamp":"2024-05-09 15:39:15"}
+{"level":"info","message":"Server started successfully","service":"fastify-socket","timestamp":"2024-05-09 15:39:15"}
+{"level":"info","message":"New connection: siZ4F_U9DR7NCMbMAAAB","service":"fastify-socket","timestamp":"2024-05-09 15:39:39"}
+{"level":"info","message":"資料庫連線成功","service":"fastify-socket","timestamp":"2024-05-09 15:40:57"}
+{"level":"info","message":"{\"level\":30,\"time\":1715240457968,\"pid\":34476,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://[::1]:3000\"}","service":"fastify-socket","timestamp":"2024-05-09 15:40:57"}
+{"level":"info","message":"{\"level\":30,\"time\":1715240457970,\"pid\":34476,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://127.0.0.1:3000\"}","service":"fastify-socket","timestamp":"2024-05-09 15:40:57"}
+{"level":"info","message":"Server started in 1.94 seconds","service":"fastify-socket","timestamp":"2024-05-09 15:40:57"}
+{"level":"info","message":"Server started successfully","service":"fastify-socket","timestamp":"2024-05-09 15:40:57"}
+{"level":"info","message":"New connection: SzKMn2Fd44p8LdqvAAAB","service":"fastify-socket","timestamp":"2024-05-09 15:44:24"}
+{"level":"info","message":"{\"level\":20,\"time\":1715240995445,\"pid\":19876,\"hostname\":\"阿象工作用\",\"file\":\"C:\\\\Users\\\\Sean9\\\\Documents\\\\projects\\\\web\\\\fastify-socket\\\\src\\\\plugins\\\\socket.plugin.ts\",\"msg\":\"skipping autoloading of file because it does not export a Fastify plugin compatible shape\"}","service":"fastify-socket","timestamp":"2024-05-09 15:49:55"}
+{"level":"info","message":"資料庫連線成功","service":"fastify-socket","timestamp":"2024-05-09 15:49:55"}
+{"level":"info","message":"{\"level\":30,\"time\":1715240996701,\"pid\":19876,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://[::1]:3000\"}","service":"fastify-socket","timestamp":"2024-05-09 15:49:56"}
+{"level":"info","message":"{\"level\":30,\"time\":1715240996704,\"pid\":19876,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://127.0.0.1:3000\"}","service":"fastify-socket","timestamp":"2024-05-09 15:49:56"}
+{"level":"info","message":"Server started in 2.027 seconds","service":"fastify-socket","timestamp":"2024-05-09 15:49:56"}
+{"level":"info","message":"Server started successfully","service":"fastify-socket","timestamp":"2024-05-09 15:49:56"}
+{"level":"info","message":"{\"level\":20,\"time\":1715241062384,\"pid\":25404,\"hostname\":\"阿象工作用\",\"file\":\"C:\\\\Users\\\\Sean9\\\\Documents\\\\projects\\\\web\\\\fastify-socket\\\\src\\\\plugins\\\\socket.plugin.ts\",\"msg\":\"skipping autoloading of file because it does not export a Fastify plugin compatible shape\"}","service":"fastify-socket","timestamp":"2024-05-09 15:51:02"}
+{"level":"info","message":"資料庫連線成功","service":"fastify-socket","timestamp":"2024-05-09 15:51:02"}
+{"level":"info","message":"{\"level\":50,\"time\":1715241063484,\"pid\":25404,\"hostname\":\"阿象工作用\",\"err\":{\"type\":\"TypeError\",\"message\":\"Cannot read properties of undefined (reading 'on')\",\"stack\":\"TypeError: Cannot read properties of undefined (reading 'on')\\n    at startServer (C:\\\\Users\\\\Sean9\\\\Documents\\\\projects\\\\web\\\\fastify-socket\\\\src\\\\app\\\\server.ts:28:12)\\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\\n    at async initializeApplication (C:\\\\Users\\\\Sean9\\\\Documents\\\\projects\\\\web\\\\fastify-socket\\\\src\\\\index.ts:9:5)\"},\"msg\":\"Cannot read properties of undefined (reading 'on')\"}","service":"fastify-socket","timestamp":"2024-05-09 15:51:03"}
+{"level":"info","message":"{\"level\":50,\"time\":1715241150941,\"pid\":2784,\"hostname\":\"阿象工作用\",\"err\":{\"type\":\"TypeError\",\"message\":\"Cannot read properties of undefined (reading 'on')\",\"stack\":\"TypeError: Cannot read properties of undefined (reading 'on')\\n    at C:\\\\Users\\\\Sean9\\\\Documents\\\\projects\\\\web\\\\fastify-socket\\\\src\\\\plugins\\\\socket.plugin.ts:24:14\\n    at Plugin.exec (C:\\\\Users\\\\Sean9\\\\Documents\\\\projects\\\\web\\\\fastify-socket\\\\node_modules\\\\.pnpm\\\\avvio@8.3.0\\\\node_modules\\\\avvio\\\\lib\\\\plugin.js:122:28)\\n    at Boot._loadPlugin (C:\\\\Users\\\\Sean9\\\\Documents\\\\projects\\\\web\\\\fastify-socket\\\\node_modules\\\\.pnpm\\\\avvio@8.3.0\\\\node_modules\\\\avvio\\\\boot.js:423:10)\\n    at processTicksAndRejections (node:internal/process/task_queues:82:21)\"},\"msg\":\"Cannot read properties of undefined (reading 'on')\"}","service":"fastify-socket","timestamp":"2024-05-09 15:52:30"}
+{"level":"info","message":"{\"level\":50,\"time\":1715241176580,\"pid\":28304,\"hostname\":\"阿象工作用\",\"err\":{\"type\":\"TypeError\",\"message\":\"Cannot read properties of undefined (reading 'on')\",\"stack\":\"TypeError: Cannot read properties of undefined (reading 'on')\\n    at C:\\\\Users\\\\Sean9\\\\Documents\\\\projects\\\\web\\\\fastify-socket\\\\src\\\\plugins\\\\socket.plugin.ts:24:14\\n    at Plugin.exec (C:\\\\Users\\\\Sean9\\\\Documents\\\\projects\\\\web\\\\fastify-socket\\\\node_modules\\\\.pnpm\\\\avvio@8.3.0\\\\node_modules\\\\avvio\\\\lib\\\\plugin.js:122:28)\\n    at Boot._loadPlugin (C:\\\\Users\\\\Sean9\\\\Documents\\\\projects\\\\web\\\\fastify-socket\\\\node_modules\\\\.pnpm\\\\avvio@8.3.0\\\\node_modules\\\\avvio\\\\boot.js:423:10)\\n    at processTicksAndRejections (node:internal/process/task_queues:82:21)\"},\"msg\":\"Cannot read properties of undefined (reading 'on')\"}","service":"fastify-socket","timestamp":"2024-05-09 15:52:56"}
+{"level":"info","message":"{\"level\":50,\"time\":1715241189431,\"pid\":32448,\"hostname\":\"阿象工作用\",\"err\":{\"type\":\"TypeError\",\"message\":\"Cannot read properties of undefined (reading 'on')\",\"stack\":\"TypeError: Cannot read properties of undefined (reading 'on')\\n    at C:\\\\Users\\\\Sean9\\\\Documents\\\\projects\\\\web\\\\fastify-socket\\\\src\\\\plugins\\\\socket.plugin.ts:24:14\\n    at Plugin.exec (C:\\\\Users\\\\Sean9\\\\Documents\\\\projects\\\\web\\\\fastify-socket\\\\node_modules\\\\.pnpm\\\\avvio@8.3.0\\\\node_modules\\\\avvio\\\\lib\\\\plugin.js:122:28)\\n    at Boot._loadPlugin (C:\\\\Users\\\\Sean9\\\\Documents\\\\projects\\\\web\\\\fastify-socket\\\\node_modules\\\\.pnpm\\\\avvio@8.3.0\\\\node_modules\\\\avvio\\\\boot.js:423:10)\\n    at processTicksAndRejections (node:internal/process/task_queues:82:21)\"},\"msg\":\"Cannot read properties of undefined (reading 'on')\"}","service":"fastify-socket","timestamp":"2024-05-09 15:53:09"}
+{"level":"info","message":"資料庫連線成功","service":"fastify-socket","timestamp":"2024-05-09 15:54:48"}
+{"level":"info","message":"Socket.io is ready","service":"fastify-socket","timestamp":"2024-05-09 15:54:49"}
+{"level":"info","message":"{\"level\":30,\"time\":1715241289071,\"pid\":28380,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://[::1]:3000\"}","service":"fastify-socket","timestamp":"2024-05-09 15:54:49"}
+{"level":"info","message":"{\"level\":30,\"time\":1715241289076,\"pid\":28380,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://127.0.0.1:3000\"}","service":"fastify-socket","timestamp":"2024-05-09 15:54:49"}
+{"level":"info","message":"Server started in 2.47 seconds","service":"fastify-socket","timestamp":"2024-05-09 15:54:49"}
+{"level":"info","message":"Server started successfully","service":"fastify-socket","timestamp":"2024-05-09 15:54:49"}
+{"level":"info","message":"New connection: arY55de2f7RUFQmwAAAB","service":"fastify-socket","timestamp":"2024-05-09 15:55:02"}
+{"level":"info","message":"資料庫連線成功","service":"fastify-socket","timestamp":"2024-05-09 15:56:05"}
+{"level":"info","message":"Socket.io is ready","service":"fastify-socket","timestamp":"2024-05-09 15:56:06"}
+{"level":"info","message":"{\"level\":30,\"time\":1715241366494,\"pid\":20556,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://[::1]:3000\"}","service":"fastify-socket","timestamp":"2024-05-09 15:56:06"}
+{"level":"info","message":"{\"level\":30,\"time\":1715241366497,\"pid\":20556,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://127.0.0.1:3000\"}","service":"fastify-socket","timestamp":"2024-05-09 15:56:06"}
+{"level":"info","message":"Server started in 2.092 seconds","service":"fastify-socket","timestamp":"2024-05-09 15:56:06"}
+{"level":"info","message":"Server started successfully","service":"fastify-socket","timestamp":"2024-05-09 15:56:06"}
+{"level":"info","message":"資料庫連線成功","service":"fastify-socket","timestamp":"2024-05-09 15:56:14"}
+{"level":"info","message":"Socket.io is ready","service":"fastify-socket","timestamp":"2024-05-09 15:56:15"}
+{"level":"info","message":"{\"level\":30,\"time\":1715241375023,\"pid\":34512,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://[::1]:3000\"}","service":"fastify-socket","timestamp":"2024-05-09 15:56:15"}
+{"level":"info","message":"{\"level\":30,\"time\":1715241375024,\"pid\":34512,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://127.0.0.1:3000\"}","service":"fastify-socket","timestamp":"2024-05-09 15:56:15"}
+{"level":"info","message":"Server started in 1.975 seconds","service":"fastify-socket","timestamp":"2024-05-09 15:56:15"}
+{"level":"info","message":"Server started successfully","service":"fastify-socket","timestamp":"2024-05-09 15:56:15"}
+{"level":"info","message":"New connection: C7hfc9BRS9tTswPBAAAB","service":"fastify-socket","timestamp":"2024-05-09 15:56:15"}
+{"level":"info","message":"資料庫連線成功","service":"fastify-socket","timestamp":"2024-05-09 16:10:35"}
+{"level":"info","message":"Socket.io is ready","service":"fastify-socket","timestamp":"2024-05-09 16:10:36"}
+{"level":"info","message":"{\"level\":30,\"time\":1715242236074,\"pid\":37508,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://[::1]:3000\"}","service":"fastify-socket","timestamp":"2024-05-09 16:10:36"}
+{"level":"info","message":"{\"level\":30,\"time\":1715242236076,\"pid\":37508,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://127.0.0.1:3000\"}","service":"fastify-socket","timestamp":"2024-05-09 16:10:36"}
+{"level":"info","message":"Server started in 2.378 seconds","service":"fastify-socket","timestamp":"2024-05-09 16:10:36"}
+{"level":"info","message":"Server started successfully","service":"fastify-socket","timestamp":"2024-05-09 16:10:36"}
+{"level":"info","message":"資料庫連線成功","service":"fastify-socket","timestamp":"2024-05-09 16:10:57"}
+{"level":"info","message":"Socket.io is ready","service":"fastify-socket","timestamp":"2024-05-09 16:10:57"}
+{"level":"info","message":"{\"level\":30,\"time\":1715242257718,\"pid\":28004,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://[::1]:3000\"}","service":"fastify-socket","timestamp":"2024-05-09 16:10:57"}
+{"level":"info","message":"{\"level\":30,\"time\":1715242257721,\"pid\":28004,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://127.0.0.1:3000\"}","service":"fastify-socket","timestamp":"2024-05-09 16:10:57"}
+{"level":"info","message":"Server started in 2.117 seconds","service":"fastify-socket","timestamp":"2024-05-09 16:10:57"}
+{"level":"info","message":"Server started successfully","service":"fastify-socket","timestamp":"2024-05-09 16:10:57"}
+{"level":"info","message":"資料庫連線成功","service":"fastify-socket","timestamp":"2024-05-09 16:12:26"}
+{"level":"info","message":"Socket.io is ready","service":"fastify-socket","timestamp":"2024-05-09 16:12:27"}
+{"level":"info","message":"{\"level\":30,\"time\":1715242347342,\"pid\":22384,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://[::1]:3000\"}","service":"fastify-socket","timestamp":"2024-05-09 16:12:27"}
+{"level":"info","message":"{\"level\":30,\"time\":1715242347344,\"pid\":22384,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://127.0.0.1:3000\"}","service":"fastify-socket","timestamp":"2024-05-09 16:12:27"}
+{"level":"info","message":"Server started in 1.961 seconds","service":"fastify-socket","timestamp":"2024-05-09 16:12:27"}
+{"level":"info","message":"Server started successfully","service":"fastify-socket","timestamp":"2024-05-09 16:12:27"}
