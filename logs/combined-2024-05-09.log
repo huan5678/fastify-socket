@@ -481,3 +481,4 @@
 {"level":"info","message":"{\"level\":30,\"time\":1715235619850,\"pid\":19248,\"hostname\":\"阿象工作用\",\"msg\":\"Server listening at http://127.0.0.1:3000\"}","service":"fastify-socket","timestamp":"2024-05-09 14:20:19"}
 {"level":"info","message":"Server started in 2.453 seconds","service":"fastify-socket","timestamp":"2024-05-09 14:20:19"}
 {"level":"info","message":"Server started successfully","service":"fastify-socket","timestamp":"2024-05-09 14:20:19"}
+{"level":"info","message":"{\"level\":20,\"time\":1715237703061,\"pid\":19248,\"hostname\":\"阿象工作用\",\"plugin\":\"fastify-graceful-shutdown\",\"signal\":\"SIGINT\",\"msg\":\"received signal\"}","service":"fastify-socket","timestamp":"2024-05-09 14:55:03"}
