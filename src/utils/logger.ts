@@ -4,7 +4,7 @@ import { FastifyLoggerOptions } from 'fastify';
 
 const isProduction = process.env.NODE_ENV === "production";
 
-const loggerOptions: LoggerOptions = {
+const LoggerOptions: LoggerOptions = {
   level: isProduction ? 'info' : 'debug',
   format: winston.format.combine(
     winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
@@ -36,11 +36,11 @@ const loggerOptions: LoggerOptions = {
   ],
 };
 
-const logger = winston.createLogger(loggerOptions);
+const Logger = winston.createLogger(LoggerOptions);
 
 
 const fastifyLogger: FastifyLoggerOptions = {
-  level: logger.level,
+  level: Logger.level,
   serializers: {
     req: (req) => ({
       method: req.method,
@@ -59,9 +59,9 @@ const fastifyLogger: FastifyLoggerOptions = {
   },
   stream: {
     write: (message) => {
-      logger.info(message.trim());
+      Logger.info(message.trim());
     },
   },
 };
 
-export {logger as default, fastifyLogger};
+export {Logger as default, fastifyLogger};

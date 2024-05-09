@@ -1,4 +1,20 @@
 import { Document } from "mongoose";
+import { JWT } from '@fastify/jwt';
+import { Server } from "socket.io";
+
+declare module 'fastify' {
+  interface FastifyRequest {
+    jwt: JWT,
+  }
+  export interface FastifyInstance
+  {
+    io: Server;
+    authenticate: (
+      request: FastifyRequest,
+      reply: FastifyReply,
+    ) => Promise<void>
+  }
+}
 
 export interface RequestParams
 {
@@ -19,6 +35,18 @@ export interface IUser extends Document {
   email: string;
   password: string;
   role: "user" | "admin";
+  avatar: string;
+  gender: "male" | "female" | "other";
+  socialMedia: {
+    facebook?: string;
+    instagram?: string;
+  };
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface UserUpdateBody
+{
+  [key: string]: string | Date | { facebook: string; instagram: string };
+}
+

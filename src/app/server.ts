@@ -1,12 +1,7 @@
-import fastify, { FastifyRequest, FastifyReply } from 'fastify';
-import fastifyIO from 'fastify-socket.io';
-import { Server } from 'socket.io';
-import logger, { fastifyLogger } from '@/utils/logger';
-import errorHandlerPlugin from '@/plugins/error-handler-plugin';
-
-const app = fastify({
-  logger: fastifyLogger,
-});
+import { FastifyRequest, FastifyReply } from "fastify";
+import Logger from "@/utils/logger";
+import app from "@/app/app.fastify";
+import { Server, Socket } from "socket.io";
 
 declare module "fastify" {
   interface FastifyInstance {
@@ -14,43 +9,36 @@ declare module "fastify" {
   }
 }
 
-const startServer = async () =>
-{
-  const port = process.env.PORT || '3000';
+const startServer = async () => {
+  const port = process.env.PORT || "3000";
   const startTime = Date.now();
   try {
-    app.get('/', (request: FastifyRequest, reply: FastifyReply) =>
-    {
+    app.get("/", (request: FastifyRequest, reply: FastifyReply) => {
       const healthCheck = {
         status: true,
-        message: 'OK',
+        message: "OK",
         uptime: process.uptime(),
         timestamp: new Date(startTime).toLocaleString(),
-        host: request.headers.host
+        host: request.headers.host,
       };
       reply.send(healthCheck);
     });
 
-    app.register(fastifyIO)
-    await errorHandlerPlugin(app);
-
-    app.ready().then(() => {
-      app.io.on('connection', (socket) => {
-          logger.info(`New connection: ${socket.id}`);
-          socket.on('disconnect', () => {
-              logger.info(`Connection closed: ${socket.id}`);
-          });
+    await app.ready();
+    app.io.on("connection", (socket: Socket) => {
+      Logger.info(`New connection: ${socket.id}`);
+      socket.on("disconnect", () => {
+        Logger.info(`Connection closed: ${socket.id}`);
       });
     });
 
     await app.listen({
       port: parseInt(port),
-    })
+    });
 
     const endTime = Date.now();
     const startupTime = (endTime - startTime) / 1000;
-    logger.info(`Server started in ${startupTime} seconds`);
-
+    Logger.info(`Server started in ${startupTime} seconds`);
   } catch (error) {
     app.log.error(error);
     process.exit(1);
